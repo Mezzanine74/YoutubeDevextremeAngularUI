@@ -24,7 +24,6 @@
             ],
             "styles": [
               "node_modules/devextreme/dist/css/dx.material.orange.light.compact.css",              
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",              
               "src/styles.css"
             ],
             "scripts": []
