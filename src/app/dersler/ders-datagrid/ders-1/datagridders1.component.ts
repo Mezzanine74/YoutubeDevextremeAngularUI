@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CrudService } from 'src/app/core/services/crud.service';
 import CustomStore from "devextreme/data/custom_store";
 import DataSource from "devextreme/data/data_source";
-import { RowUpdatingEvent} from 'devextreme/ui/data_grid'
+import { RowUpdatingEvent, InitializedEvent} from 'devextreme/ui/data_grid'
 import { ICategory } from 'src/app/core/models/ICategory';
+import { DxDataGridComponent } from 'devextreme-angular';
+
+declare var dataGridDers1: any;
 
 @Component({
   selector: 'app-datagridders1',
@@ -12,14 +15,15 @@ import { ICategory } from 'src/app/core/models/ICategory';
 })
 export class Datagridders1Component implements OnInit {
 
-  datasource2: DataSource;
+  public datasource: DataSource;
+  @ViewChild('dataGrid', {static: false}) dataGrid: DxDataGridComponent | undefined;
 
   constructor(private dataService: CrudService<ICategory>) { 
 
     let that = this;
     const controllerName = 'category';
 
-    this.datasource2 = new DataSource({
+    this.datasource = new DataSource({
       store:new CustomStore({
         key: "id",
         load(): any {
@@ -75,6 +79,8 @@ export class Datagridders1Component implements OnInit {
     // this.dataService.getCategoryList().subscribe(
     //   data => { this.categories = data;}
     // )
+    dataGridDers1 = this;
+
   }
 
 }
