@@ -1,10 +1,16 @@
 <p>datagridders1 works!</p>
-
+<!-- [columns]="['id', 'categoryName', 'description']" -->
 <dx-data-grid
   id="gridContainer"
-  [dataSource]="customers"
-  keyExpr="ID"
-  [columns]="['CompanyName', 'City', 'State', 'Phone', 'Fax']"
+  [dataSource]="datasource2"
+  keyExpr="id"
   [showBorders]="true"
+  (onRowUpdating)="onRowUpdating($any($event))"
 >
+  <dxi-column dataField="id" [allowEditing]="false"></dxi-column>
+  <dxi-column dataField="categoryName"></dxi-column>
+  <dxi-column dataField="description"></dxi-column>
+  <dxo-header-filter [visible]="true" ></dxo-header-filter>
+  <dxo-filter-row [visible]="true" applyFilter="'auto'"></dxo-filter-row>
+  <dxo-editing [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true" refreshMode="'reshape'" ></dxo-editing>
 </dx-data-grid>
