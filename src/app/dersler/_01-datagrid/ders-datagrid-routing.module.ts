@@ -1,11 +1,9 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Datagridders1Component } from './ders-1/datagridders1.component';
-import { Datagridders2Component } from './ders-2/datagridders2.component';
+import { DatagridcrudislemleriComponent } from './_01-crud-islemleri/datagridcrudislemleri.component';
 
 const routes: Routes = [
-  { path: 'ders-1', component: Datagridders1Component},
-  { path: 'ders-2', component: Datagridders2Component},
+  { path: '01-crud-islemleri', component: DatagridcrudislemleriComponent},
 ];
 
 @NgModule({
