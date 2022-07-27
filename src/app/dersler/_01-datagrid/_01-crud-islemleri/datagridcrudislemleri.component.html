@@ -1,4 +1,3 @@
-<p>datagridders1 works!</p>
 <!-- [columns]="['id', 'categoryName', 'description']" -->
 <dx-data-grid
   #dataGrid
@@ -6,8 +5,7 @@
   [dataSource]="datasource"
   keyExpr="id"
   [showBorders]="true"
-  (onRowUpdating)="onRowUpdating($any($event))
-  "
+  (onRowUpdating)="onRowUpdating($any($event))"
 >
   <dxi-column dataField="id" [allowEditing]="false"></dxi-column>
   <dxi-column dataField="categoryName"></dxi-column>

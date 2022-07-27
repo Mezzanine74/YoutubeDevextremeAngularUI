@@ -6,19 +6,17 @@ import { RowUpdatingEvent, InitializedEvent} from 'devextreme/ui/data_grid'
 import { ICategory } from 'src/app/core/models/ICategory';
 import { DxDataGridComponent } from 'devextreme-angular';
 
-declare var dataGridDers1: any;
-
 @Component({
-  selector: 'app-datagridders1',
-  templateUrl: './datagridders1.component.html',
-  styleUrls: ['./datagridders1.component.css']
+  selector: 'app-datagridcrudislemleri',
+  templateUrl: './datagridcrudislemleri.component.html',
+  styleUrls: ['./datagridcrudislemleri.component.css']
 })
-export class Datagridders1Component implements OnInit {
+export class DatagridcrudislemleriComponent implements OnInit {
 
   public datasource: DataSource;
   @ViewChild('dataGrid', {static: false}) dataGrid: DxDataGridComponent | undefined;
 
-  constructor(private dataService: CrudService<ICategory>) { 
+  constructor(private crudService: CrudService<ICategory>) { 
 
     let that = this;
     const controllerName = 'category';
@@ -28,12 +26,12 @@ export class Datagridders1Component implements OnInit {
         key: "id",
         load(): any {
           // yeni yontem ile yaptiramadim. ToPromise devre disi birakilabilmeli
-          return that.dataService.getList(controllerName).toPromise();
+          return that.crudService.getList(controllerName).toPromise();
         },
         update(key: number, model: ICategory): Promise<ICategory> {
           let returnModel: ICategory;
           return new Promise<ICategory>((resolve, reject) => {
-            that.dataService.updateItem(model, controllerName).subscribe(
+            that.crudService.updateItem(model, controllerName).subscribe(
               data => {returnModel = data}
             );
             resolve(returnModel);
@@ -43,7 +41,7 @@ export class Datagridders1Component implements OnInit {
         insert(model: ICategory): Promise<ICategory> {
           let returnModel: ICategory;
           return new Promise<ICategory>((resolve, reject) => {
-            that.dataService.insertItem(model, controllerName).subscribe(
+            that.crudService.insertItem(model, controllerName).subscribe(
               data => {returnModel = data}
             );
             resolve(returnModel);
@@ -52,7 +50,7 @@ export class Datagridders1Component implements OnInit {
         remove(key: number): Promise<void> {
           let returnValue: number;
           return new Promise<void>((resolve, reject) => {
-            that.dataService.removeItem(key, controllerName).subscribe(
+            that.crudService.removeItem(key, controllerName).subscribe(
               data => {returnValue = data}
             );
             resolve();
@@ -76,11 +74,10 @@ export class Datagridders1Component implements OnInit {
   //test: any = of([{name: 'Test'}, {name: 'Work'}]);
 
   ngOnInit(): void {
-    // this.dataService.getCategoryList().subscribe(
+    // this.crudService.getCategoryList().subscribe(
     //   data => { this.categories = data;}
     // )
-    dataGridDers1 = this;
-
   }
+
 
 }
