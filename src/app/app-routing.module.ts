@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
+  { path:'logout', redirectTo: '/login' },
   {path: 'login', component: LoginComponent },
   {path: '01-datagrid', loadChildren: () => import('./dersler/_01-datagrid/ders-datagrid.module').then(c=>c.DersDatagridModule)},
   {path: '02-list', loadChildren: () => import('./dersler/_02-list/ders-list.module').then(c=>c.DersListModule)},
