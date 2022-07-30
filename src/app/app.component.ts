@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoginService } from './core/services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,7 @@ export class AppComponent{
   helloWorld(){
     console.log('clicked');
   }
-  constructor(private loginService: LoginService) {
+  constructor() {
     
   }
 

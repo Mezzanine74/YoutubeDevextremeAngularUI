@@ -16,7 +16,7 @@ export class LoginService {
   // production
   // public url = "http://185.141.33.46:1100";
 
-  loginChange: Subject<ILoginStatus> = new Subject<ILoginStatus>();
+  loginSuccess$: Subject<ILoginStatus> = new Subject<ILoginStatus>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -43,12 +43,21 @@ export class LoginService {
     return this.http.post<IToken>(this.url + '/token', 'grant_type=password&username='+username+'&password=' + password, { 'headers': headers });
   }
 
+  logout(){
+    localStorage.setItem('devextremeyoutube-login-status', JSON.stringify({ 
+        username: null, 
+        isLogin: false, 
+        accessToken: null}
+      ));
+    this.loginSuccess$.next({ username: this.getUserName(), isLogin: this.getIsLogin(), accessToken: this.getLoginStatus().accessToken });
+  }
+
   doLogin(values: any) {
     this.login(values.username, values.password).subscribe(
       data => {
         this.setLoginStatus(data.access_token, values.username);
 
-        this.loginChange.next({ username: this.getUserName(), isLogin: this.getIsLogin(), accessToken: this.getLoginStatus().accessToken });
+        this.loginSuccess$.next({ username: this.getUserName(), isLogin: this.getIsLogin(), accessToken: this.getLoginStatus().accessToken });
 
         this.router.navigate(['/']);
       },
