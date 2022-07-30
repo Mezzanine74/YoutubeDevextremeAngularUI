@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   { path:'logout', redirectTo: '/login' },
   {path: 'login', component: LoginComponent },
+  {path: 'admin', loadChildren: () => import('./admin/admin.module').then(c=>c.AdminModule)},
   {path: '01-datagrid', loadChildren: () => import('./dersler/_01-datagrid/ders-datagrid.module').then(c=>c.DersDatagridModule)},
   {path: '02-list', loadChildren: () => import('./dersler/_02-list/ders-list.module').then(c=>c.DersListModule)},
   {path: '03-selectbox', loadChildren: () => import('./dersler/_03-selectbox/ders-selectbox.module').then(c=>c.DersSelectboxModule)},
