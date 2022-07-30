@@ -1,0 +1,12 @@
+<p>adminmain works!</p>
+
+<button class="btn btn-success" (click)="sendTime()">Send Time Now</button>
+
+<dx-tabs
+    [dataSource]="longtabs"
+    [scrollByContent]="true"
+    [showNavButtons]="true"
+    (onItemClick)="selectTab($event)"
+></dx-tabs>
+
+<router-outlet></router-outlet>
