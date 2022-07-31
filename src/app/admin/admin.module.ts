@@ -5,7 +5,7 @@ import { AdmincustomerComponent } from './panels/customer/admincustomer.componen
 import { RouterModule } from '@angular/router';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminService } from './service/admin.service';
-import { DxTabsModule } from 'devextreme-angular';
+import { DxDataGridModule, DxTabsModule } from 'devextreme-angular';
 import { AdminorderComponent } from './panels/order/adminorder.component';
 
 
@@ -20,6 +20,7 @@ import { AdminorderComponent } from './panels/order/adminorder.component';
     CommonModule,
     RouterModule,
     DxTabsModule,
+    DxDataGridModule,
     AdminRoutingModule
   ],
   providers: [
