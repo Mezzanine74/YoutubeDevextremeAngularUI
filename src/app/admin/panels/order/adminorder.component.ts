@@ -7,6 +7,7 @@ import DataSource from "devextreme/data/data_source";
 import { RowUpdatingEvent} from 'devextreme/ui/data_grid'
 import { ISelectOption } from 'src/app/core/models/ISelectOption';
 import { IEmployee } from 'src/app/core/models/IEmployee';
+import { EnumControllerNames } from 'src/app/core/models/EnumControllerNames';
 
 @Component({
   selector: 'app-adminorder',
@@ -15,6 +16,7 @@ import { IEmployee } from 'src/app/core/models/IEmployee';
 })
 export class AdminorderComponent implements OnInit {
 
+  EnumControllerNames = EnumControllerNames;
   public datasource: DataSource;
   public customerStore: CustomStore;
   public shipperStore: CustomStore;
@@ -23,9 +25,9 @@ export class AdminorderComponent implements OnInit {
   @ViewChild('dataGrid', {static: false}) dataGrid: DxDataGridComponent | undefined;
   
   constructor(private crudService: CrudService<IOrder>) {  
-    
+
     let that = this;
-    const controllerName = 'order';
+    const controllerName = that.EnumControllerNames.ORDER;
 
     this.datasource = new DataSource({
       store:new CustomStore({
@@ -70,7 +72,7 @@ export class AdminorderComponent implements OnInit {
       key: "id",
       loadMode: 'raw',
       load(): any {
-        return that.crudService.getList('customer').toPromise();
+        return that.crudService.getList(that.EnumControllerNames.CUSTOMER).toPromise();
       },
     })
 
@@ -79,12 +81,12 @@ export class AdminorderComponent implements OnInit {
       key: "id",
       loadMode: 'raw',
       load(): any {
-        return that.crudService.getList('shipper').toPromise();
+        return that.crudService.getList(that.EnumControllerNames.SHIPPER).toPromise();
       },
     })
 
     // FILL EMPLOYEEID (MAPPING NOT AVAILABLE IN CUSTOMSTORE)
-    that.crudService.getList('employee').toPromise().then((data: any) => {
+    that.crudService.getList(that.EnumControllerNames.EMPLOYEE).toPromise().then((data: any) => {
       let itemCollect: ISelectOption[] = [];
       data?.forEach((dataItem:IEmployee) => {
         itemCollect.push({id: dataItem.id, text: dataItem.firstName + " " + dataItem.lastName});
@@ -92,24 +94,6 @@ export class AdminorderComponent implements OnInit {
       this.employeeData = itemCollect;
     });
     
-
-    // EMPLOYEE DATA SOURCE
-    // this.employeeStore = {
-    //   store: new CustomStore({
-    //     key: "id",
-    //     loadMode: 'raw',
-    //     load(): any {
-    //       return that.crudService.getList('employee').toPromise();
-    //     },
-    //   }),
-    //   map: (dataItem: any) => {
-    //     return {
-    //         fullName: dataItem.firstName + " " + dataItem.lastName
-    //     }
-    //   }
-    // }
-
-
   }
 
   onRowUpdating(e: RowUpdatingEvent){

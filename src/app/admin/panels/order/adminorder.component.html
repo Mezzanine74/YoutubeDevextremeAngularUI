@@ -9,6 +9,7 @@
 <!-- COLUMNS -->
   <dxi-column dataField="id" [allowEditing]="false"></dxi-column>
   <dxi-column dataField="customerId">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
     <dxo-lookup
         [dataSource]="customerStore"
         valueExpr="id"
@@ -40,11 +41,6 @@
   <dxi-column dataField="shipRegion"></dxi-column>  
   <dxi-column dataField="shipPostalCode"></dxi-column>  
   <dxi-column dataField="shipCountry"></dxi-column>  
-
-  <!-- customer: ICustomer; -->
-  <!-- employee: IEmployee; -->
-  <!-- <dxi-column dataField="shipCity"></dxi-column>   -->
-  <!-- shipper: IShipper; -->
 
   <!-- SETTINGS -->
   <dxo-header-filter [visible]="true" ></dxo-header-filter>
