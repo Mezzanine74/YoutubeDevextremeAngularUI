@@ -1,1 +1,54 @@
-<p>adminorder works!</p>
+<dx-data-grid
+  #dataGrid
+  id="gridContainer"
+  [dataSource]="datasource"
+  keyExpr="id"
+  [showBorders]="true"
+  (onRowUpdating)="onRowUpdating($any($event))"
+>
+<!-- COLUMNS -->
+  <dxi-column dataField="id" [allowEditing]="false"></dxi-column>
+  <dxi-column dataField="customerId">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+    <dxo-lookup
+        [dataSource]="customerStore"
+        valueExpr="id"
+        displayExpr="companyName">
+    </dxo-lookup>
+  </dxi-column>
+  <dxi-column dataField="customerCode"></dxi-column>
+  <dxi-column dataField="employeeId">
+    <dxo-lookup
+        [dataSource]="employeeData"
+        valueExpr="id"
+        displayExpr="text">
+    </dxo-lookup>
+  </dxi-column>
+  <dxi-column dataField="orderDate" dataType="date"></dxi-column>
+  <dxi-column dataField="requiredDate" dataType="date"></dxi-column>
+  <dxi-column dataField="shippedDate" dataType="date"></dxi-column>
+  <dxi-column dataField="shipperId">
+    <dxo-lookup
+        [dataSource]="shipperStore"
+        valueExpr="id"
+        displayExpr="companyName">
+    </dxo-lookup>
+  </dxi-column>
+  <dxi-column dataField="freight"></dxi-column>
+  <dxi-column dataField="shipName"></dxi-column>
+  <dxi-column dataField="shipAddress"></dxi-column>
+  <dxi-column dataField="shipCity"></dxi-column>  
+  <dxi-column dataField="shipRegion"></dxi-column>  
+  <dxi-column dataField="shipPostalCode"></dxi-column>  
+  <dxi-column dataField="shipCountry"></dxi-column>  
+
+  <!-- SETTINGS -->
+  <dxo-header-filter [visible]="true" ></dxo-header-filter>
+  <dxo-filter-row [visible]="true" applyFilter="'auto'"></dxo-filter-row>
+  <dxo-editing 
+    [allowAdding]="true" 
+    [allowUpdating]="true" 
+    [allowDeleting]="true" 
+    refreshMode="'reshape'"
+    mode="popup" ></dxo-editing>
+</dx-data-grid>

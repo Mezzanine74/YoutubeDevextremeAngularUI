@@ -1,0 +1,15 @@
+export enum EnumControllerNames {
+    CATEGORY = "category",
+    CUSTOMER = "customer",
+    CUSTOMERDEMOGRAPHIC = "customerDemographic",
+    EMPLOYEE = "employee",
+    EMPLOYEEFILE = "employeeFile",
+    ORDER = "order",
+    ORDERDETAIL = "orderDetail",
+    PEOPLEBICYCLE = "peopleBicycle",
+    PRODUCT = "product",
+    REGION = "region",
+    SHIPPER = "shipper",
+    SUPPLIER = "supplier",
+    TERRITORY = "territory",    
+  }

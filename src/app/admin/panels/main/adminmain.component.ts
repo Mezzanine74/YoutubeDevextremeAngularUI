@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AdminService } from '../../service/admin.service';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Router, Event as NavigationEvent, NavigationEnd } from '@angular/router';
+import { EnumControllerNames } from 'src/app/core/models/EnumControllerNames';
+import { SelectionChangedEvent } from 'devextreme/ui/tabs'
+import { ValueChangedEvent } from 'devextreme/ui/select_box'
+import { BehaviorSubject } from 'rxjs';
+import { DxSelectBoxComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'app-adminmain',
@@ -9,32 +13,44 @@ import { AdminService } from '../../service/admin.service';
 })
 export class AdminmainComponent implements OnInit {
 
-  longtabs: any[] = [
-    { id:1, text: 'customers' },
-    { id:2, text: 'orders' },
-  ];
+  selectedTabIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  selectedTabIndex: number = 0;
 
-  selectTab(event: any){
-    console.log(event);
-    this.adminService.sendPanel$.next(event.itemData);
+  enumControllerNames = EnumControllerNames;
 
-    // if (event.itemData.id === 1){
-    //   this.router.navigate(['/admin/panel/customer']);
-    // } else if (event.itemData.id === 2){
-    //   this.router.navigate(['/admin/panel/order']);
-    // }
+  tabDataSource: string[];
+  @ViewChild('selectBox', {static: false}) selectBox: DxSelectBoxComponent | undefined;  
 
+  onSelectBoxValueChanged(event: ValueChangedEvent){
+    this.selectedTabIndex$.next(this.tabDataSource.findIndex(c=>c.toString().toLowerCase() === event.value.toString().toLowerCase()));
   }
 
-  sendTime(){
-    let newDate = new Date();
-    console.log('clicked', newDate)
-    this.adminService.sendTime$.next(newDate);
+  onTabSelectionChanged(event: SelectionChangedEvent){
+    this.selectedTabIndex$.next(this.tabDataSource.findIndex(c=>c.toString().toLowerCase() === event.addedItems[0].toString().toLowerCase()))
   }
 
-  constructor(private adminService: AdminService, private router: Router) { }
+  constructor(private router: Router, private changeDetection: ChangeDetectorRef) { 
+    this.tabDataSource = Object.keys(this.enumControllerNames);
 
+    // router subscription in constructor. ngOnInit will be too late
+    this.router.events
+          .subscribe(
+            (event: NavigationEvent) => {
+              if(event instanceof NavigationEnd) {
+                this.selectedTabIndex$.next(this.tabDataSource.findIndex(c=>c.toString().toLowerCase() === event.url.replace('/admin/panel/','').toString().toLowerCase()));
+              }
+            });
+    
+  }
+  
   ngOnInit(): void {
+    this.selectedTabIndex$.subscribe(data => {
+      console.log('next', data);
+      this.selectedTabIndex = data;
+      this.selectBox?.instance.option('value', this.tabDataSource[data]);
+      this.router.navigate(['/admin/panel/' + this.tabDataSource[data].toString().toLowerCase()]); // routing lowercase yapmazsan claismiyor.
+    })
+
   }
 
 }

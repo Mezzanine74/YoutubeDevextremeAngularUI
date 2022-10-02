@@ -1,12 +1,25 @@
-<p>adminmain works!</p>
-
-<button class="btn btn-success" (click)="sendTime()">Send Time Now</button>
-
-<dx-tabs
-    [dataSource]="longtabs"
-    [scrollByContent]="true"
-    [showNavButtons]="true"
-    (onItemClick)="selectTab($event)"
-></dx-tabs>
+<div class="row">
+    <div class="col col-12 col-lg-2">
+        <dx-select-box
+        [dataSource]="tabDataSource"
+        [value]="tabDataSource[selectedTabIndex]"
+        [searchMode]="'contains'"
+        [searchTimeout]="200"
+        [minSearchLength]="0"
+        [searchEnabled]="true"
+        (onValueChanged)="onSelectBoxValueChanged($event)"
+        ></dx-select-box>
+    
+    </div>
+    <div class="col col-12 col-lg-10">
+        <dx-tabs
+        [dataSource]="tabDataSource"
+        [selectedIndex]="selectedTabIndex"
+        [scrollByContent]="true"
+        [showNavButtons]="true"
+        (onSelectionChanged)="onTabSelectionChanged($event)"
+        ></dx-tabs>
+    </div>
+</div>
 
 <router-outlet></router-outlet>
