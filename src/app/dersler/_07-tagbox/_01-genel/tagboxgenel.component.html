@@ -1,0 +1,32 @@
+<p>tagboxgenel works!</p>
+
+<h6>Simple</h6>
+<dx-tag-box [items]="simpleProducts"></dx-tag-box>
+
+<h6>Object</h6>
+<dx-tag-box 
+    [items]="objectProducts"
+    displayExpr="categoryName"
+    valueExpr="id"
+></dx-tag-box>
+
+<h6>from ArrayStore</h6>
+<dx-tag-box 
+    [dataSource]="arrayStore"
+    displayExpr="categoryName"
+    valueExpr="id"
+></dx-tag-box>
+
+<h6>from Datasource</h6>
+<dx-tag-box 
+    [dataSource]="dataSourceArray"
+    displayExpr="categoryName"
+    valueExpr="id"
+></dx-tag-box>
+
+<h6>from WebApi</h6>
+<dx-tag-box 
+    [dataSource]="dataSourceApi"
+    displayExpr="categoryName"
+    valueExpr="id"
+></dx-tag-box>
