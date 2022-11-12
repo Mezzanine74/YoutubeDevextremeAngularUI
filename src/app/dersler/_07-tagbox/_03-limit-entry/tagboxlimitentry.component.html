@@ -1,0 +1,9 @@
+<p>tagboxlimitentry works!</p>
+
+<h6>Object</h6>
+<dx-tag-box 
+    [items]="objectProducts"
+    displayExpr="categoryName"
+    valueExpr="id"
+    (onValueChanged)="tagBoxValueChanged($event)"
+></dx-tag-box>
