@@ -1,8 +1,9 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PopupgenelComponent } from './_01-genel/popupgenel.component';
 
 const routes: Routes = [
-  //{ path: '01-crud-islemleri', component: DatagridcrudislemleriComponent},
+  { path: '01-genel', component: PopupgenelComponent},
 ];
 
 @NgModule({
