@@ -1,0 +1,24 @@
+<p>popupgenel works!</p>
+
+<dx-popup
+[width]="300"
+[height]="280"
+[showTitle]="true"
+title="Information"
+[dragEnabled]="false"
+[hideOnOutsideClick]="true"
+[showCloseButton]="true"
+(onShowing)="popupShowing($event)"
+(onInitialized)="popupInitialized($event)"
+[(visible)]="popupVisible" >
+  <div *dxTemplate="let data of 'content'">
+    <h2>Test</h2>
+    <dx-form id="form" [formData]="employee">
+      <dxi-item dataField="name"></dxi-item>
+      <dxi-item dataField="surname"></dxi-item>
+    </dx-form>
+  </div>
+</dx-popup>
+
+<input type="button" value="Show 1" (click)="btn1Click()">
+<input type="button" value="Show 2" (click)="btn2Click()">
