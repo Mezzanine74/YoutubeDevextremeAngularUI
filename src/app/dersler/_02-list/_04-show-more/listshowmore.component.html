@@ -1,0 +1,11 @@
+<p>listshowmore works!</p>
+
+<dx-list
+    [dataSource]="listDataSource"
+    [showSelectionControls]="true"
+    selectionMode="multiple"
+    pageLoadMode="nextButton"
+    displayExpr="companyName"
+    (onInitialized)="onListInitialized($event)"
+    (onItemRendered)="onListItemRendered($event)"
+></dx-list>
