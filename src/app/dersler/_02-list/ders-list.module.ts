@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { DersListRoutingModule } from './ders-list-routing.module';
 import { DxListModule } from 'devextreme-angular';
 import { ListgenelComponent } from './_01-genel/listgenel.component';
+import { ListgetsetComponent } from './_02-get-set/listgetset.component';
 
 @NgModule({
   declarations: [
-    ListgenelComponent
+    ListgenelComponent,
+    ListgetsetComponent
   ],
   imports: [
     CommonModule,
