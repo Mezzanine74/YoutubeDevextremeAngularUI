@@ -1,0 +1,13 @@
+<p>listgenel works!</p>
+
+<dx-list
+    [dataSource]="listDataSource"
+    [showSelectionControls]="true"
+    selectionMode="multiple"
+    (onInitialized)="onListInitialized($event)"
+>
+    <div *dxTemplate="let item of 'item'">
+        <h3>{{item.categoryName}}</h3>
+        <h6>{{item.description}}</h6>
+    </div>
+</dx-list>
