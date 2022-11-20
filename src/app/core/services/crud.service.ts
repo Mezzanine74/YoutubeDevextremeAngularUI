@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICategory } from '../models/ICategory';
@@ -18,6 +18,10 @@ export class CrudService<T> {
       return this.http.get<T[]>(this.url + '/api/' + controllerName);
     }
 
+    public search(controllerName: string, params: any): Observable<T[]> {
+      return this.http.get<T[]>(this.url + '/api/' + controllerName, {params:new HttpParams().append("model", JSON.stringify(params ) )});
+    }
+    
     updateItem(model: T, controllerName: string): Observable<T> {
       return this.http.put<T>(this.url + '/api/' + controllerName, model);
     }
